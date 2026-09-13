@@ -9,21 +9,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const message = document.getElementById("message");
 
     // ==========================================
-    // CHECK USER LOGIN
-    // ==========================================
-
-    const {
-        data: { user },
-        error: userError
-    } = await supabaseClient.auth.getUser();
-
-    if (userError || !user) {
-        window.location.href = "index.html";
-        return;
-    }
-
-
-    // ==========================================
     // LOAD TRAINING DATA
     // ==========================================
 
