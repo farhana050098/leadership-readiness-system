@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employment Information</title>
+
+    <link rel="stylesheet" href="employment.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div>
+                <h1>Employment Information</h1>
+                <p>Manage your employment information</p>
+            </div>
+
+            <button id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+
+        <form id="employmentForm">
+
+            <!-- MAKLUMAT PERJAWATAN -->
+
+            <div class="profile-card">
+
+                <h2>Maklumat Perjawatan</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="salary_grade">
+                            Gred Gaji
+                        </label>
+
+                        <input
+                            type="text"
+                            id="salary_grade"
+                            placeholder="Contoh: N9"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="appointment_date">
+                            Tarikh Lantikan
+                        </label>
+
+                        <input
+                            type="date"
+                            id="appointment_date"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="retirement_date">
+                            Tarikh Bersara
+                        </label>
+
+                        <input
+                            type="date"
+                            id="retirement_date"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="original_department">
+                            Jabatan Hakiki
+                        </label>
+
+                        <input
+                            type="text"
+                            id="original_department"
+                            placeholder="Enter original department"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="current_department">
+                            Jabatan Sekarang
+                        </label>
+
+                        <input
+                            type="text"
+                            id="current_department"
+                            placeholder="Enter current department"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="original_position">
+                            Jawatan Hakiki
+                        </label>
+
+                        <input
+                            type="text"
+                            id="original_position"
+                            placeholder="Enter original position"
+                            required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="current_position">
+                            Jawatan Sekarang
+                        </label>
+
+                        <input
+                            type="text"
+                            id="current_position"
+                            placeholder="Enter current position"
+                            required>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEJARAH JAWATAN -->
+
+            <div class="profile-card">
+
+                <div class="section-header">
+
+                    <h2>Senarai Jawatan Pernah Disandang</h2>
+
+                    <button
+                        type="button"
+                        id="addPositionBtn"
+                        class="add-btn">
+
+                        + Add New Row
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Jawatan</th>
+                                <th>Dari</th>
+                                <th>Hingga</th>
+                                <th>Tempoh</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="positionTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEJARAH APC -->
+
+            <div class="profile-card">
+
+                <div class="section-header">
+
+                    <h2>Sejarah APC</h2>
+
+                    <button
+                        type="button"
+                        id="addApcBtn"
+                        class="add-btn">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+
+                <div id="apcList">
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-btn">
+
+                Save / Update
+
+            </button>
+
+            <p id="message"></p>
+
+            <div class="navigation-buttons">
+        
+                <a href="profile.html" class="back-btn">
+                    Back
+                </a>
+
+                <a href="training.html" class="next-btn">
+                    Next
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="employment.js"></script>
+
+</body>
+
+</html>

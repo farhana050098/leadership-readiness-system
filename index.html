@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Leadership Readiness System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+        rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <div class="wrapper">
+
+        <form id="loginForm">
+
+            <h1>Login</h1>
+
+
+            <!-- EMAIL -->
+
+            <div class="input-box">
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                    required>
+
+                <i class="bx bx-envelope"></i>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-box">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Password"
+                    required>
+
+                <i class="bx bx-lock"></i>
+
+            </div>
+
+
+            <!-- REMEMBER -->
+
+            <div class="remember-forgot">
+
+                <label>
+
+                    <input type="checkbox">
+
+                    Remember me
+
+                </label>
+
+                <a href="forgot-password.html">
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="btn"
+                id="loginBtn">
+
+                Login
+
+            </button>
+
+
+            <!-- REGISTER -->
+
+            <div class="register-link">
+
+                <p>
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Register
+                    </a>
+
+                </p>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <p id="message"></p>
+
+        </form>
+
+    </div>
+
+
+    <!-- SUPABASE LIBRARY -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <!-- SUPABASE CONFIG -->
+
+    <script src="supabase.js"></script>
+
+
+    <!-- LOGIN SCRIPT -->
+
+    <script>
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const message =
+            document.getElementById("message");
+
+
+        loginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+                const password =
+                    document
+                    .getElementById("password")
+                    .value;
+
+
+                // Loading
+
+                loginBtn.disabled = true;
+
+                loginBtn.innerText =
+                    "Logging in...";
+
+                message.innerText = "";
+
+
+                // LOGIN SUPABASE
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+                    .auth
+                    .signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+                // LOGIN ERROR
+
+                if (error) {
+
+                    console.error(error);
+
+                    message.innerText =
+                        error.message;
+
+                    message.style.color =
+                        "#ffdddd";
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.innerText =
+                        "Login";
+
+                    return;
+
+                }
+
+
+                // LOGIN SUCCESS
+
+                message.innerText =
+                    "Login successful!";
+
+                message.style.color =
+                    "#ccffcc";
+
+
+                // Go profile page
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "profile.html";
+
+                }, 500);
+
+            }
+
+        );
+
+    </script>
+
+</body>
+
+</html>

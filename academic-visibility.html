@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academic Visibility</title>
+
+    <link rel="stylesheet" href="academic-visibility.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+            <h1>Academic Visibility</h1>
+            <p>Manage academic, research, ICAN and student affairs involvement</p>
+        </div>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         AKADEMIK
+    ========================== -->
+
+    <div class="section-card">
+
+        <div class="section-title">
+
+            <h2>Akademik</h2>
+
+            <p>
+                Rekod ketampakan dan penglibatan dalam bidang akademik.
+            </p>
+
+        </div>
+
+
+        <!-- 1 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>1. Profesor Pelawat</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('profesor-pelawat')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="profesor-pelawat"></div>
+
+        </div>
+
+
+        <!-- 2 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>2. Pensyarah Pelawat</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('pensyarah-pelawat')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="pensyarah-pelawat"></div>
+
+        </div>
+
+
+        <!-- 3 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>3. Pakar Rujuk</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('pakar-rujuk')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="pakar-rujuk"></div>
+
+        </div>
+
+
+        <!-- 4 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>4. Keynote Speaker</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('keynote-speaker')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="keynote-speaker"></div>
+
+        </div>
+
+
+        <!-- 5 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>5. Invited Speaker</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('invited-speaker')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="invited-speaker"></div>
+
+        </div>
+
+
+        <!-- 6 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>6. Fasilitator</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('fasilitator')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="fasilitator"></div>
+
+        </div>
+
+
+        <!-- 7 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>7. Pemeriksa Luar (Program)</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('pemeriksa-luar-program')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="pemeriksa-luar-program"></div>
+
+        </div>
+
+
+        <!-- 8 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>8. Pemeriksa Luar (Tesis)</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('pemeriksa-luar-tesis')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="pemeriksa-luar-tesis"></div>
+
+        </div>
+
+
+        <!-- 9 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>9. Pemeriksa Dalaman (Tesis)</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('pemeriksa-dalaman-tesis')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="pemeriksa-dalaman-tesis"></div>
+
+        </div>
+
+
+        <!-- 10 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>10. Jawatankuasa Viva Voce</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('viva-voce')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="viva-voce"></div>
+
+        </div>
+
+
+        <!-- 11 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>11. Jawatankuasa Proposal Defence</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('proposal-defence')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="proposal-defence"></div>
+
+        </div>
+
+
+        <!-- 12 -->
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>12. Jawatankuasa Lantikan Universiti / Fakulti</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('lantikan-universiti-akademik')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="lantikan-universiti-akademik"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PENYELIDIKAN
+    ========================== -->
+
+    <div class="section-card">
+
+        <div class="section-title">
+
+            <h2>Penyelidikan</h2>
+
+            <p>
+                Rekod penglibatan dan ketampakan dalam penyelidikan.
+            </p>
+
+        </div>
+
+
+        <div id="research-section">
+
+
+            <!-- 1 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>1. Editorial Board Member Jurnal</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('editorial-board')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="editorial-board"></div>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>2. Penilai / Penyemak</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('penilai-penyemak')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="penilai-penyemak"></div>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>3. Jawatankuasa Persidangan</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('jawatankuasa-persidangan')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="jawatankuasa-persidangan"></div>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>4. Jawatankuasa Lantikan Universiti / Fakulti</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('lantikan-universiti-penyelidikan')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="lantikan-universiti-penyelidikan"></div>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>5. Geran Penyelidikan Semasa</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('geran-semasa')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="geran-semasa"></div>
+
+            </div>
+
+
+            <!-- 6 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>6. Geran Penyelidikan Selesai</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('geran-selesai')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="geran-selesai"></div>
+
+            </div>
+
+
+            <!-- 7 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>7. Pelajar Pascasiswazah Semasa</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('pelajar-semasa')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="pelajar-semasa"></div>
+
+            </div>
+
+
+            <!-- 8 -->
+
+            <div class="category-card">
+
+                <div class="category-header">
+
+                    <h3>8. Pelajar Pascasiswazah Selesai</h3>
+
+                    <button
+                        type="button"
+                        class="add-btn"
+                        onclick="addRecord('pelajar-selesai')">
+
+                        + Add New
+
+                    </button>
+
+                </div>
+
+                <div id="pelajar-selesai"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ICAN
+    ========================== -->
+
+    <div class="section-card">
+
+        <div class="section-title">
+
+            <h2>ICAN</h2>
+
+            <p>
+                Rekod penglibatan khidmat masyarakat, alumni dan jawatankuasa.
+            </p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>1. Penglibatan Khidmat Masyarakat</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('khidmat-masyarakat')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="khidmat-masyarakat"></div>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>2. Penglibatan Alumni</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('penglibatan-alumni')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="penglibatan-alumni"></div>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>3. Jawatankuasa Lantikan Universiti / Fakulti</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('lantikan-universiti-ican')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="lantikan-universiti-ican"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         HAL EHWAL PELAJAR
+    ========================== -->
+
+    <div class="section-card">
+
+        <div class="section-title">
+
+            <h2>Hal Ehwal Pelajar</h2>
+
+            <p>
+                Rekod penglibatan dalam hal ehwal pelajar dan jawatankuasa.
+            </p>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>1. Penglibatan Hal Ehwal Pelajar</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('hal-ehwal-pelajar')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="hal-ehwal-pelajar"></div>
+
+        </div>
+
+
+        <div class="category-card">
+
+            <div class="category-header">
+
+                <h3>2. Jawatankuasa Lantikan Universiti / Fakulti</h3>
+
+                <button
+                    type="button"
+                    class="add-btn"
+                    onclick="addRecord('lantikan-universiti-hep')">
+
+                    + Add New
+
+                </button>
+
+            </div>
+
+            <div id="lantikan-universiti-hep"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+        
+        <button
+            type="button"
+            id="saveBtn"
+            class="save-btn">
+
+            Save / Update
+
+        </button>
+
+            <p id="message"></p>
+
+    <div class="navigation-buttons">
+        
+    <a href="academic-leadership.html" class="back-btn">
+            Back
+        </a>
+
+        <a href="profile.html" class="next-btn">
+            Next
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="academic-visibility.js"></script>
+
+</body>
+
+</html>

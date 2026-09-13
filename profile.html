@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Information</title>
+
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+
+            <div>
+                <h1>Personal Information</h1>
+                <p>Manage your personal information</p>
+            </div>
+
+            <button id="logoutBtn">
+                Logout
+            </button>
+
+        </div>
+
+
+        <!-- PROFILE CARD -->
+        <div class="profile-card">
+
+            <form id="profileForm">
+
+                <!-- STAFF ID -->
+                <div class="form-group">
+
+                    <label for="staff_id">
+                        Staff ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="staff_id"
+                        placeholder="Enter Staff ID"
+                        required>
+
+                </div>
+
+
+                <!-- GELARAN -->
+                <div class="form-group">
+
+                    <label for="title">
+                        Gelaran
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Enter title"
+                        required>
+
+                </div>
+
+
+                <!-- NAMA -->
+                <div class="form-group">
+
+                    <label for="full_name">
+                        Nama
+                    </label>
+
+                    <input
+                        type="text"
+                        id="full_name"
+                        placeholder="Enter full name"
+                        required>
+
+                </div>
+
+
+                <!-- JANTINA -->
+                <div class="form-group">
+
+                    <label for="gender">
+                        Jantina
+                    </label>
+
+                    <select id="gender" required>
+
+                        <option value="">
+                            Select gender
+                        </option>
+
+                        <option value="Lelaki">
+                            Lelaki
+                        </option>
+
+                        <option value="Perempuan">
+                            Perempuan
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- UMUR -->
+                <div class="form-group">
+
+                    <label for="age">
+                        Umur
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        min="18"
+                        max="100"
+                        placeholder="Enter age"
+                        required>
+
+                </div>
+
+
+                <!-- EMAIL -->
+                <div class="form-group">
+
+                    <label for="email">
+                        Emel
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                        required>
+
+                </div>
+
+
+                <!-- PHONE -->
+                <div class="form-group">
+
+                    <label for="phone">
+                        No. Telefon
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="01x-xxxxxxx"
+                        pattern="01[0-9]-[0-9]{7,8}"
+                        required>
+
+                </div>
+
+
+                <!-- TEMPOH BERKHIDMAT -->
+                <div class="form-group">
+
+                    <label for="service_years">
+                        Tempoh Berkhidmat
+                    </label>
+
+                    <input
+                        type="number"
+                        id="service_years"
+                        min="0"
+                        max="60"
+                        placeholder="Enter years of service"
+                        required>
+
+                </div>
+
+
+                <!-- NAVIGATION BUTTON -->
+                   
+                <div class="navigation-buttons">
+                    
+                    <button
+                        type="submit"
+                        class="save-btn">
+
+                    Save / Update
+
+                    </button>
+
+                <!-- MESSAGE -->
+                <p id="message"></p>
+
+                    <a href="employment.html" class="next-btn">
+                        Next
+                    </a>
+                
+                </div>
+                
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <!-- PROFILE JAVASCRIPT -->
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academic Leadership History</title>
+
+    <link rel="stylesheet" href="academic-leadership.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+
+        <div>
+            <h1>Academic Leadership History</h1>
+            <p>Manage your academic administrative leadership experience</p>
+        </div>
+
+        <button id="logoutBtn">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="info-card">
+
+        <h2>Sejarah Jawatan Pentadbir Akademik</h2>
+
+        <p>
+            Sila masukkan semua jawatan pentadbir akademik yang pernah
+            disandang.
+        </p>
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="profile-card">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Senarai Jawatan</h2>
+
+                <p>
+                    Masukkan jawatan dan tempoh perkhidmatan anda.
+                </p>
+            </div>
+
+
+            <button
+                type="button"
+                id="addPositionBtn"
+                class="add-btn">
+
+                + Add New
+
+            </button>
+
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Jawatan
+                        </th>
+
+                        <th>
+                            Tarikh Mula
+                        </th>
+
+                        <th>
+                            Tarikh Tamat
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="leadershipTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+        <!-- SAVE -->
+        <button 
+            type="button"
+            id="saveBtn"
+            class="save-btn">
+            Save / Update
+        </button>
+
+        <p id="message"></p>
+
+    <div class="navigation-buttons">
+        
+        <a href="training.html" class="nav-btn back-btn">
+            Back
+        </a>
+
+        <a href="academic-visibility.html" class="nav-btn next-btn">
+            Next
+        </a>
+
+    </div>
+
+
+</div>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="academic-leadership.js"></script>
+
+</body>
+
+</html>

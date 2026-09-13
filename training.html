@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Training Information</title>
+
+    <link rel="stylesheet" href="training.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div>
+            <h1>Training Information</h1>
+            <p>Manage your training and development records</p>
+        </div>
+
+        <button id="logoutBtn">Logout</button>
+    </div>
+
+
+    <form id="trainingForm">
+
+        <!-- ===================================== -->
+        <!-- MANDATORY COURSES -->
+        <!-- ===================================== -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+                <h2>Mandatory Courses</h2>
+                <p>PTM, HETL and LEAP</p>
+            </div>
+
+            <div id="mandatoryCourses"></div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- PKA -->
+        <!-- ===================================== -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+                <h2>PKA – Academic Leadership</h2>
+                <p>Please indicate your attendance for each module.</p>
+            </div>
+
+            <div id="pkaModules"></div>
+
+        </div>
+
+
+        <!-- ===================================== -->
+        <!-- PKI -->
+        <!-- ===================================== -->
+
+        <div class="section-card">
+
+            <div class="section-title">
+                <h2>PKI – Institutional Leadership</h2>
+                <p>Please indicate your attendance for each module.</p>
+            </div>
+
+            <div id="pkiModules"></div>
+
+        </div>
+
+
+        <!-- SAVE -->
+        <button type="submit" class="save-btn">
+            Save / Update
+        </button>
+
+        <p id="message"></p>
+
+       <div class="navigation-buttons">
+        
+            <a href="employment.html" class="back-btn">
+                Back
+            </a>
+
+            <a href="academic-leadership.html" class="next-btn">
+                Next
+            </a>
+        
+        </div>
+
+    
+
+    </form>
+
+</div>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+<script src="training.js"></script>
+
+</body>
+</html> 
