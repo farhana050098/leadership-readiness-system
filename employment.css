@@ -585,6 +585,7 @@ td input:focus {
 
 .view-evidence-btn:hover {
     opacity: 0.5;
+    text-decoration: none;
 }
 
 
