@@ -541,7 +541,58 @@ td input:focus {
 .next-btn:hover {
     background: #0f2d4d;
 }
+/* ==========================================
+   VIEW EVIDENCE BUTTON
+   ========================================== */
 
+.view-evidence-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 4px 0 0;
+
+    color: #2563eb;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.view-evidence-btn:hover {
+    text-decoration: underline;
+}
+
+     .view-evidence-btn {
+
+    background: none;
+
+    border: none;
+
+    padding: 0;
+
+    color: #2563eb;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.view-evidence-btn:hover {
+    opacity: 0.5;
+}
+
+
+.existing-evidence {
+
+    margin-top: 4px;
+
+}
 
 /* ==========================================
    MOBILE
@@ -598,68 +649,4 @@ td input:focus {
         width: 100%;
     }
 
-
-     .navigation-buttons {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        margin: 25px 0 30px;
-    }
-
-    .back-btn,
-    .next-btn {
-        padding: 12px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 14px;
-    }
-
-    .back-btn {
-    background: #777;
-    color: white;
-    }
-
-    .back-btn:hover {
-    background: #555;
-    }
-
-    .next-btn {
-        background: #163b65;
-        color: white;
-    }
-
-    .next-btn:hover {
-        background: #0f2d4d;
-    }
-
-    .view-evidence-btn {
-
-    background: none;
-
-    border: none;
-
-    padding: 0;
-
-    color: #2563eb;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-}
-
-
-.view-evidence-btn:hover {
-    opacity: 0.5;
-}
-
-
-.existing-evidence {
-
-    margin-top: 4px;
-
-}
 }
