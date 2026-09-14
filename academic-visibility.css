@@ -217,7 +217,6 @@ body {
 }
 
 .back-btn,
-.next-btn,
 .save-btn {
     border-radius: 8px;
     text-decoration: none;
@@ -303,14 +302,13 @@ body {
 
     .navigation-buttons {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         gap: 15px;
         margin: 25px 0 30px;
     }
 
-    .back-btn,
-    .next-btn {
+    .back-btn{
         padding: 12px 20px;
         border-radius: 8px;
         text-decoration: none;
@@ -326,17 +324,47 @@ body {
     background: #555;
     }
 
-    .next-btn {
-        background: #163b65;
-        color: white;
-    }
-
-    .next-btn:hover {
-        background: #0f2d4d;
-    }
-
     .save-btn {
         margin: 0 auto;
     }
+
+}
+
+
+.existing-evidence {
+
+    margin-top: 4px;
+
+}
+
+ .view-evidence {
+
+    background: none;
+
+    border: none;
+
+    padding: 0;
+
+    color: #2563eb;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+
+.view-evidence:hover {
+    opacity: 0.5;
+}
+
+
+.existing-evidence {
+
+    margin-top: 4px;
 
 }

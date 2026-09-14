@@ -262,4 +262,28 @@ body {
         margin: 0 auto;
     }
 
+    /* ==========================================
+   VIEW EVIDENCE BUTTON
+   ========================================== */
+
+.view-evidence {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    color: #2563eb;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+.view-evidence:hover {
+    opacity: 0.5;
+}
+
 }

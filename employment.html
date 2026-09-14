@@ -2,17 +2,22 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Employment Information</title>
 
     <link rel="stylesheet" href="employment.css">
+
 </head>
+
 
 <body>
 
     <div class="container">
+
+        <!-- HEADER -->
 
         <div class="header">
 
@@ -30,114 +35,190 @@
 
         <form id="employmentForm">
 
-            <!-- MAKLUMAT PERJAWATAN -->
+
+            <!-- ==========================================
+                 MAKLUMAT PERJAWATAN
+            =========================================== -->
 
             <div class="profile-card">
 
                 <h2>Maklumat Perjawatan</h2>
 
+
                 <div class="form-grid">
 
+
+                    <!-- GRED GAJI -->
+
                     <div class="form-group">
+
                         <label for="salary_grade">
                             Gred Gaji
                         </label>
 
-                        <input
-                            type="text"
+                        <select
                             id="salary_grade"
-                            placeholder="Contoh: N9"
                             required>
+
+                            <option value="">
+                                -- Pilih Gred Gaji --
+                            </option>
+
+                            <option value="DS11">
+                                DS11
+                            </option>
+
+                            <option value="DS13">
+                                DS13
+                            </option>
+
+                            <option value="DS14">
+                                DS14
+                            </option>
+
+                            <option value="VK7">
+                                VK7
+                            </option>
+
+                            <option value="VK6">
+                                VK6
+                            </option>
+
+                            <option value="VK5">
+                                VK5
+                            </option>
+
+                        </select>
+
                     </div>
 
 
+                    <!-- TARIKH LANTIKAN -->
+
                     <div class="form-group">
+
                         <label for="appointment_date">
-                            Tarikh Lantikan
+                            Tarikh Lantikan UiTM
                         </label>
 
                         <input
                             type="date"
                             id="appointment_date"
                             required>
+
                     </div>
 
 
+                    <!-- TARIKH BERSARA -->
+
                     <div class="form-group">
+
                         <label for="retirement_date">
-                            Tarikh Bersara
+                            Tarikh Bersara UiTM
                         </label>
 
                         <input
                             type="date"
                             id="retirement_date"
                             required>
+
                     </div>
 
 
+                    <!-- JABATAN HAKIKI -->
+
                     <div class="form-group">
+
                         <label for="original_department">
-                            Jabatan Hakiki
+                            Jabatan Hakiki UiTM
                         </label>
 
                         <input
                             type="text"
                             id="original_department"
-                            placeholder="Enter original department"
+                            placeholder="Contoh: Fakulti Sains Komputer"
                             required>
+
                     </div>
 
 
+                    <!-- JABATAN SEKARANG -->
+
                     <div class="form-group">
+
                         <label for="current_department">
-                            Jabatan Sekarang
+                            Jabatan Sekarang UiTM
                         </label>
 
                         <input
                             type="text"
                             id="current_department"
-                            placeholder="Enter current department"
+                            placeholder="Contoh: Institut Kepimpinan dan Pembangunan"
                             required>
+
                     </div>
 
 
+                    <!-- JAWATAN HAKIKI -->
+
                     <div class="form-group">
+
                         <label for="original_position">
-                            Jawatan Hakiki
+                            Jawatan Hakiki UiTM
                         </label>
 
                         <input
                             type="text"
                             id="original_position"
-                            placeholder="Enter original position"
+                            placeholder="Masukkan jawatan hakiki"
                             required>
+
                     </div>
 
 
+                    <!-- JAWATAN SEKARANG -->
+
                     <div class="form-group">
+
                         <label for="current_position">
-                            Jawatan Sekarang
+                            Jawatan Sekarang UiTM
                         </label>
 
                         <input
                             type="text"
                             id="current_position"
-                            placeholder="Enter current position"
+                            placeholder="Masukkan jawatan sekarang"
                             required>
+
                     </div>
+
 
                 </div>
 
             </div>
 
 
-            <!-- SEJARAH JAWATAN -->
+
+            <!-- ==========================================
+                 SEJARAH JAWATAN
+            =========================================== -->
 
             <div class="profile-card">
 
                 <div class="section-header">
 
-                    <h2>Senarai Jawatan Pernah Disandang</h2>
+                    <div>
+
+                        <h2>
+                            Senarai Jawatan Pernah Disandang
+                        </h2>
+
+                        <p class="section-description">
+                            Rekod jawatan yang pernah disandang.
+                        </p>
+
+                    </div>
+
 
                     <button
                         type="button"
@@ -158,14 +239,21 @@
                         <thead>
 
                             <tr>
+
                                 <th>Jawatan</th>
+
                                 <th>Dari</th>
+
                                 <th>Hingga</th>
+
                                 <th>Tempoh</th>
+
                                 <th>Action</th>
+
                             </tr>
 
                         </thead>
+
 
                         <tbody id="positionTableBody">
 
@@ -178,13 +266,27 @@
             </div>
 
 
-            <!-- SEJARAH APC -->
+
+            <!-- ==========================================
+                 SEJARAH APC
+            =========================================== -->
 
             <div class="profile-card">
 
                 <div class="section-header">
 
-                    <h2>Sejarah APC</h2>
+                    <div>
+
+                        <h2>
+                            Sejarah Anugerah Perkhidmatan Cemerlang
+                        </h2>
+
+                        <p class="section-description">
+                            Sila masukkan tahun penerimaan APC dan muat naik bukti.
+                        </p>
+
+                    </div>
+
 
                     <button
                         type="button"
@@ -205,6 +307,79 @@
             </div>
 
 
+
+            <!-- ==========================================
+                 LNPT
+            =========================================== -->
+
+            <div class="profile-card">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            Laporan Nilai Prestasi Tahunan (LNPT)
+                        </h2>
+
+                        <p class="section-description">
+                            Sila masukkan markah LNPT bagi 3 tahun terkini.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="lnpt-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Bil.
+                                </th>
+
+                                <th>
+                                    Tahun
+                                </th>
+
+                                <th>
+                                    Markah LNPT
+                                </th>
+
+                                <th>
+                                    Evidence
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="lnptTableBody">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 SAVE
+            =========================================== -->
+
             <button
                 type="submit"
                 class="save-btn">
@@ -213,24 +388,44 @@
 
             </button>
 
+
             <p id="message"></p>
 
+
+
+            <!-- ==========================================
+                 NAVIGATION
+            =========================================== -->
+
             <div class="navigation-buttons">
-        
-                <a href="profile.html" class="back-btn">
+
+                <a
+                    href="profile.html"
+                    class="back-btn">
+
                     Back
+
                 </a>
 
-                <a href="training.html" class="next-btn">
+
+                <a
+                    href="training.html"
+                    class="next-btn">
+
                     Next
+
                 </a>
 
             </div>
+
 
         </form>
 
     </div>
 
+
+
+    <!-- SUPABASE -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 

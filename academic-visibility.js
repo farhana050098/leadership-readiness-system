@@ -714,7 +714,7 @@ function addRecord(
                                 href="#"
                                 class="view-evidence"
                             >
-                                View Evidence
+                                📄 View Evidence
                             </a>
 
                         </small>

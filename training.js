@@ -62,9 +62,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function loadTraining(userId) {
 
-    const mandatoryContainer =
-        document.getElementById("mandatoryCourses");
-
     const pkaContainer =
         document.getElementById("pkaModules");
 
@@ -72,34 +69,9 @@ async function loadTraining(userId) {
         document.getElementById("pkiModules");
 
 
-    mandatoryContainer.innerHTML = "";
+    // Clear containers
     pkaContainer.innerHTML = "";
     pkiContainer.innerHTML = "";
-
-
-    // ==========================================
-    // LOAD COURSES
-    // ==========================================
-
-    const {
-        data: courses,
-        error: courseError
-    } = await supabaseClient
-        .from("training_courses")
-        .select("*")
-        .order("course_code");
-
-
-    if (courseError) {
-
-        console.error(courseError);
-
-        document.getElementById("message").innerText =
-            "Failed to load training courses.";
-
-        return;
-
-    }
 
 
     // ==========================================
@@ -121,6 +93,31 @@ async function loadTraining(userId) {
 
         document.getElementById("message").innerText =
             "Failed to load training modules.";
+
+        return;
+
+    }
+
+
+    // ==========================================
+    // LOAD COURSES
+    // ==========================================
+
+    const {
+        data: courses,
+        error: courseError
+    } = await supabaseClient
+        .from("training_courses")
+        .select("*")
+        .order("course_code");
+
+
+    if (courseError) {
+
+        console.error(courseError);
+
+        document.getElementById("message").innerText =
+            "Failed to load training courses.";
 
         return;
 
@@ -150,45 +147,6 @@ async function loadTraining(userId) {
         return;
 
     }
-
-
-    // ==========================================
-    // MANDATORY
-    // ==========================================
-
-    const mandatoryCodes = [
-        "PTM",
-        "HETL",
-        "LEAP"
-    ];
-
-
-    const mandatoryCourses =
-        courses.filter(course =>
-            mandatoryCodes.includes(
-                course.course_code
-            )
-        );
-
-
-    mandatoryCourses.forEach(course => {
-
-        const record =
-            userTraining.find(item =>
-                item.course_id === course.id &&
-                item.module_id === null
-            );
-
-
-        mandatoryContainer.appendChild(
-            createTrainingItem(
-                course,
-                null,
-                record
-            )
-        );
-
-    });
 
 
     // ==========================================
@@ -283,6 +241,7 @@ function createTrainingItem(
 
     const div =
         document.createElement("div");
+
 
     div.className =
         "training-item";
@@ -406,7 +365,7 @@ function createTrainingItem(
                                 href="#"
                                 class="view-evidence"
                             >
-                                View Certificate
+                                📄 View Evidence
                             </a>
 
                         </small>
@@ -694,12 +653,15 @@ async function saveTraining(userId) {
     message.innerText =
         "Saving training information...";
 
+
     message.style.color =
         "";
 
 
     const items =
-        document.querySelectorAll(".training-item");
+        document.querySelectorAll(
+            ".training-item"
+        );
 
 
     const trainingRecords = [];
@@ -746,11 +708,15 @@ async function saveTraining(userId) {
 
 
             const yearInput =
-                item.querySelector(".training-year");
+                item.querySelector(
+                    ".training-year"
+                );
 
 
             const evidenceInput =
-                item.querySelector(".training-evidence");
+                item.querySelector(
+                    ".training-evidence"
+                );
 
 
             let year = null;
