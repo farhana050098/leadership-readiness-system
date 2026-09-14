@@ -560,27 +560,7 @@ td input:focus {
     text-decoration: none;
 }
 
-.view-evidence-btn:hover {
-    text-decoration: underline;
-}
 
-     .view-evidence-btn {
-
-    background: none;
-
-    border: none;
-
-    padding: 0;
-
-    color: #2563eb;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-}
 
 
 .view-evidence-btn:hover {
