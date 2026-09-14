@@ -8,9 +8,14 @@
 // DOM ELEMENTS
 // ==========================================
 
-const employmentForm = document.getElementById("employmentForm");
-const logoutBtn = document.getElementById("logoutBtn");
-const message = document.getElementById("message");
+const employmentForm =
+    document.getElementById("employmentForm");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const message =
+    document.getElementById("message");
 
 const positionTableBody =
     document.getElementById("positionTableBody");
@@ -35,7 +40,6 @@ async function checkUser() {
         error
     } = await supabaseClient.auth.getUser();
 
-
     if (error || !user) {
 
         window.location.href = "index.html";
@@ -43,12 +47,7 @@ async function checkUser() {
         return;
     }
 
-
-    console.log(
-        "Logged in user:",
-        user.id
-    );
-
+    console.log("Logged in user:", user.id);
 
     await loadEmployment(user.id);
 
@@ -75,7 +74,6 @@ function escapeHtml(value) {
 
     }
 
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -96,9 +94,7 @@ async function uploadEvidence(
 ) {
 
     if (!file) {
-
         return null;
-
     }
 
 
@@ -112,13 +108,11 @@ async function uploadEvidence(
         "image/png"
     ];
 
-
     if (!allowedTypes.includes(file.type)) {
 
         throw new Error(
             "Evidence mestilah dalam format PDF, JPG atau PNG."
         );
-
     }
 
 
@@ -129,13 +123,11 @@ async function uploadEvidence(
     const maxSize =
         10 * 1024 * 1024;
 
-
     if (file.size > maxSize) {
 
         throw new Error(
             "Saiz evidence tidak boleh melebihi 10MB."
         );
-
     }
 
 
@@ -156,7 +148,6 @@ async function uploadEvidence(
 
     const filePath =
         `${userId}/employment/${folder}/${Date.now()}_${safeName}`;
-
 
     console.log(
         "Uploading evidence:",
@@ -190,12 +181,10 @@ async function uploadEvidence(
             error
         );
 
-
         throw new Error(
             "Gagal upload evidence: " +
             error.message
         );
-
     }
 
 
@@ -216,14 +205,12 @@ async function uploadEvidence(
 async function getEvidenceUrl(path) {
 
     if (!path) {
-
         return null;
-
     }
 
 
     // ==========================================
-    // IF ALREADY URL
+    // IF ALREADY FULL URL
     // ==========================================
 
     if (
@@ -232,7 +219,6 @@ async function getEvidenceUrl(path) {
     ) {
 
         return path;
-
     }
 
 
@@ -294,7 +280,6 @@ async function loadEmployment(userId) {
 
 
     if (!data) {
-
         return;
     }
 
@@ -322,60 +307,193 @@ async function loadEmployment(userId) {
 
 
     if (salaryGrade) {
-
         salaryGrade.value =
             data.salary_grade || "";
-
     }
-
 
     if (appointmentDate) {
-
         appointmentDate.value =
             data.appointment_date || "";
-
     }
-
 
     if (retirementDate) {
-
         retirementDate.value =
             data.retirement_date || "";
-
     }
-
 
     if (originalDepartment) {
-
         originalDepartment.value =
             data.original_department || "";
-
     }
-
 
     if (currentDepartment) {
-
         currentDepartment.value =
             data.current_department || "";
-
     }
-
 
     if (originalPosition) {
-
         originalPosition.value =
             data.original_position || "";
-
     }
-
 
     if (currentPosition) {
-
         currentPosition.value =
             data.current_position || "";
+    }
+}
 
+
+// ==========================================
+// CALCULATE POSITION DURATION
+// ==========================================
+
+function calculatePositionDuration(
+    fromValue,
+    toValue
+) {
+
+    if (!fromValue || !toValue) {
+        return "";
     }
 
+
+    const fromDate =
+        new Date(`${fromValue}T00:00:00`);
+
+    const toDate =
+        new Date(`${toValue}T00:00:00`);
+
+
+    // Invalid date
+    if (
+        isNaN(fromDate.getTime()) ||
+        isNaN(toDate.getTime())
+    ) {
+
+        return "";
+    }
+
+
+    // To date cannot be before From date
+    if (toDate < fromDate) {
+
+        return "Tarikh tidak sah";
+    }
+
+
+    let years =
+        toDate.getFullYear() -
+        fromDate.getFullYear();
+
+    let months =
+        toDate.getMonth() -
+        fromDate.getMonth();
+
+    let days =
+        toDate.getDate() -
+        fromDate.getDate();
+
+
+    // ==========================================
+    // ADJUST DAYS
+    // ==========================================
+
+    if (days < 0) {
+
+        months--;
+
+        const previousMonth =
+            new Date(
+                toDate.getFullYear(),
+                toDate.getMonth(),
+                0
+            );
+
+        days +=
+            previousMonth.getDate();
+    }
+
+
+    // ==========================================
+    // ADJUST MONTHS
+    // ==========================================
+
+    if (months < 0) {
+
+        years--;
+
+        months += 12;
+    }
+
+
+    const result = [];
+
+
+    if (years > 0) {
+
+        result.push(
+            `${years} tahun`
+        );
+    }
+
+
+    if (months > 0) {
+
+        result.push(
+            `${months} bulan`
+        );
+    }
+
+
+    if (days > 0) {
+
+        result.push(
+            `${days} hari`
+        );
+    }
+
+
+    if (result.length === 0) {
+
+        result.push("0 hari");
+    }
+
+
+    return result.join(" ");
+}
+
+
+// ==========================================
+// UPDATE POSITION DURATION
+// ==========================================
+
+function updatePositionDuration(row) {
+
+    const fromInput =
+        row.querySelector(".position-from");
+
+    const toInput =
+        row.querySelector(".position-to");
+
+    const durationInput =
+        row.querySelector(".position-duration");
+
+
+    if (
+        !fromInput ||
+        !toInput ||
+        !durationInput
+    ) {
+
+        return;
+    }
+
+
+    durationInput.value =
+        calculatePositionDuration(
+            fromInput.value,
+            toInput.value
+        );
 }
 
 
@@ -397,8 +515,9 @@ function addPositionRow(data = {}) {
                 type="text"
                 class="position-name"
                 placeholder="Jawatan"
-                value="${escapeHtml(data.position || "")}"
-                placeholder="Contoh: Ketua Jabatan"
+                value="${escapeHtml(
+                    data.position || ""
+                )}"
             >
 
         </td>
@@ -431,8 +550,8 @@ function addPositionRow(data = {}) {
             <input
                 type="text"
                 class="position-duration"
+                placeholder="Automatik"
                 value=""
-                placeholder="CTempoh akan dikira"
                 readonly
             >
 
@@ -455,80 +574,41 @@ function addPositionRow(data = {}) {
 
     positionTableBody.appendChild(row);
 
-        const fromInput = row.querySelector(".position-from");
-    const toInput = row.querySelector(".position-to");
-    const durationInput = row.querySelector(".position-duration");
 
-    function calculateDuration() {
-        const fromValue = fromInput.value;
-        const toValue = toInput.value;
+    // ==========================================
+    // CALCULATE DURATION
+    // ==========================================
 
-        if (!fromValue || !toValue) {
-            durationInput.value = "";
-            return;
+    const fromInput =
+        row.querySelector(".position-from");
+
+    const toInput =
+        row.querySelector(".position-to");
+
+
+    fromInput.addEventListener(
+        "change",
+        function () {
+
+            updatePositionDuration(row);
+
         }
+    );
 
-        const fromDate = new Date(fromValue);
-        const toDate = new Date(toValue);
 
-        if (toDate < fromDate) {
-            durationInput.value = "Tarikh tidak sah";
-            return;
+    toInput.addEventListener(
+        "change",
+        function () {
+
+            updatePositionDuration(row);
+
         }
+    );
 
-        let years = toDate.getFullYear() - fromDate.getFullYear();
-        let months = toDate.getMonth() - fromDate.getMonth();
-        let days = toDate.getDate() - fromDate.getDate();
 
-        if (days < 0) {
-            months--;
+    // Calculate existing record
+    updatePositionDuration(row);
 
-            const previousMonth = new Date(
-                toDate.getFullYear(),
-                toDate.getMonth(),
-                0
-            );
-
-            days += previousMonth.getDate();
-        }
-
-        if (months < 0) {
-            years--;
-            months += 12;
-        }
-
-        let result = [];
-
-        if (years > 0) {
-            result.push(`${years} tahun`);
-        }
-
-        if (months > 0) {
-            result.push(`${months} bulan`);
-        }
-
-        if (days > 0) {
-            result.push(`${days} hari`);
-        }
-
-        if (result.length === 0) {
-            result.push("0 hari");
-        }
-
-        durationInput.value = result.join(" ");
-    }
-
-    fromInput.addEventListener("change", calculateDuration);
-    toInput.addEventListener("change", calculateDuration);
-
-    // Kira semula untuk data lama
-    calculateDuration();
-
-    // Delete
-    row.querySelector(".delete-position-btn").addEventListener("click", () => {
-        row.remove();
-    });
-}
 
     // ==========================================
     // DELETE
@@ -543,7 +623,6 @@ function addPositionRow(data = {}) {
 
             }
         );
-
 }
 
 
@@ -590,7 +669,6 @@ async function loadPositionHistory(userId) {
         addPositionRow();
 
         return;
-
     }
 
 
@@ -599,7 +677,6 @@ async function loadPositionHistory(userId) {
         addPositionRow(item);
 
     });
-
 }
 
 
@@ -609,128 +686,40 @@ async function loadPositionHistory(userId) {
 
 function addApcRow(data = {}) {
 
-    const row = document.createElement("div");
-    row.className = "apc-row";
+    const row =
+        document.createElement("div");
 
-    const evidencePath =
-        data.evidence_url ||
-        data.evidence_path ||
-        "";
 
-    row.dataset.evidencePath = evidencePath;
+    row.className =
+        "apc-row";
 
-    row.innerHTML = `
-        <div class="apc-field">
-            <label>Tahun APC</label>
-
-            <input
-                type="number"
-                class="apc-year"
-                value="${data.apc_year || ""}"
-                min="1900"
-                max="2100"
-                placeholder="Contoh: 2025"
-            >
-        </div>
-
-        <div class="apc-field">
-            <label>Evidence</label>
-
-            <input
-                type="file"
-                class="apc-file"
-                accept=".pdf,.jpg,.jpeg,.png"
-            >
-
-            <div class="existing-evidence">
-                ${
-                    evidencePath
-                        ? `
-                            <button
-                                type="button"
-                                class="view-evidence-btn"
-                            >
-                                📄 View Evidence
-                            </button>
-                        `
-                        : ""
-                }
-            </div>
-
-            <small class="evidence-status">
-                ${
-                    evidencePath
-                        ? "Evidence telah disimpan."
-                        : "PDF / JPG / PNG, maksimum 10MB."
-                }
-            </small>
-        </div>
-
-        <div class="apc-action">
-            <button
-                type="button"
-                class="delete-btn delete-apc-btn"
-            >
-                Delete
-            </button>
-        </div>
-    `;
-
-    apcList.appendChild(row);
 
     // ==========================================
     // EXISTING EVIDENCE PATH
     // ==========================================
 
+    const evidencePath =
+        data.evidence_url ||
+        data.evidence_path ||
+        data.evidence ||
+        "";
 
-    const viewBtn = row.querySelector(".view-evidence-btn");
 
-    if (viewBtn) {
+    row.dataset.evidencePath =
+        evidencePath;
 
-        viewBtn.addEventListener("click", async () => {
 
-            if (!row.dataset.evidencePath) {
-                alert("Evidence tidak dijumpai.");
-                return;
-            }
+    console.log(
+        "APC Evidence Path:",
+        evidencePath
+    );
 
-            try {
-
-                viewBtn.disabled = true;
-                viewBtn.textContent = "Opening...";
-
-                const url = await getEvidenceUrl(
-                    row.dataset.evidencePath
-                );
-
-                if (!url) {
-                    alert("Tidak dapat membuka evidence.");
-                    return;
-                }
-
-                window.open(url, "_blank");
-
-            } catch (error) {
-
-                console.error("View APC Evidence Error:", error);
-
-                alert("Ralat semasa membuka evidence.");
-
-            } finally {
-
-                viewBtn.disabled = false;
-                viewBtn.textContent = "📄 View Evidence";
-            }
-        });
-    }
 
     // ==========================================
     // APC HTML
     // ==========================================
 
     row.innerHTML = `
-
-        <!-- APC YEAR -->
 
         <div class="apc-input-group">
 
@@ -745,13 +734,13 @@ function addApcRow(data = {}) {
                 placeholder="Contoh: 2025"
                 min="1900"
                 max="2100"
-                value="${data.apc_year || ""}"
+                value="${escapeHtml(
+                    data.apc_year || ""
+                )}"
             >
 
         </div>
 
-
-        <!-- EVIDENCE -->
 
         <div class="apc-input-group">
 
@@ -787,8 +776,6 @@ function addApcRow(data = {}) {
             </div>
 
 
-            <!-- STATUS -->
-
             <small class="evidence-status">
 
                 ${
@@ -801,8 +788,6 @@ function addApcRow(data = {}) {
 
         </div>
 
-
-        <!-- DELETE -->
 
         <button
             type="button"
@@ -833,7 +818,14 @@ function addApcRow(data = {}) {
             "click",
             async function () {
 
+                const originalText =
+                    "📄 View Evidence";
+
+
                 try {
+
+                    viewButton.disabled =
+                        true;
 
                     viewButton.innerText =
                         "Opening...";
@@ -854,7 +846,6 @@ function addApcRow(data = {}) {
                         throw new Error(
                             "Evidence path tidak dijumpai."
                         );
-
                     }
 
 
@@ -875,7 +866,6 @@ function addApcRow(data = {}) {
                         throw new Error(
                             "Signed URL tidak dapat dijana."
                         );
-
                     }
 
 
@@ -893,14 +883,17 @@ function addApcRow(data = {}) {
 
 
                     alert(
+                        error.message ||
                         "Evidence tidak dapat dibuka."
                     );
 
                 } finally {
 
-                    viewButton.innerText =
-                        "📄 View Evidence";
+                    viewButton.disabled =
+                        false;
 
+                    viewButton.innerText =
+                        originalText;
                 }
 
             }
@@ -913,26 +906,42 @@ function addApcRow(data = {}) {
     // FILE CHANGE
     // ==========================================
 
-    const fileInput = row.querySelector(".apc-file");
-    const status = row.querySelector(".evidence-status");
+    const fileInput =
+        row.querySelector(
+            ".apc-file"
+        );
 
-    fileInput.addEventListener("change", () => {
 
-        if (fileInput.files.length > 0) {
+    fileInput.addEventListener(
+        "change",
+        function () {
 
-            const file = fileInput.files[0];
+            const file =
+                this.files[0];
 
-            status.textContent =
-                `File dipilih: ${file.name}. Sila tekan Save Changes untuk simpan.`;
 
-        } else {
+            const status =
+                row.querySelector(
+                    ".evidence-status"
+                );
 
-            status.textContent =
-                evidencePath
-                    ? "Evidence telah disimpan."
-                    : "PDF / JPG / PNG, maksimum 10MB.";
+
+            if (!file) {
+
+                status.innerText =
+                    evidencePath
+                        ? "Evidence telah disimpan."
+                        : "PDF / JPG / PNG, maksimum 10MB.";
+
+                return;
+            }
+
+
+            status.innerText =
+                `Fail dipilih: ${file.name}. Tekan Save Changes untuk simpan.`;
+
         }
-    });
+    );
 
 
     // ==========================================
@@ -953,7 +962,6 @@ function addApcRow(data = {}) {
 
         }
     );
-
 }
 
 
@@ -986,7 +994,6 @@ async function loadApcHistory(userId) {
         );
 
         return;
-
     }
 
 
@@ -1007,7 +1014,6 @@ async function loadApcHistory(userId) {
         addApcRow();
 
         return;
-
     }
 
 
@@ -1018,11 +1024,9 @@ async function loadApcHistory(userId) {
             item
         );
 
-
         addApcRow(item);
 
     });
-
 }
 
 
@@ -1043,8 +1047,14 @@ function addLnptRow(
     // STORE EVIDENCE PATH
     // ==========================================
 
+    const evidencePath =
+        data.evidence_url ||
+        data.evidence_path ||
+        "";
+
+
     row.dataset.evidencePath =
-        data.evidence_url || "";
+        evidencePath;
 
 
     // ==========================================
@@ -1066,7 +1076,9 @@ function addLnptRow(
                 placeholder="Tahun"
                 min="1900"
                 max="2100"
-                value="${data.lnpt_year || ""}"
+                value="${escapeHtml(
+                    data.lnpt_year || ""
+                )}"
             >
 
         </td>
@@ -1099,7 +1111,7 @@ function addLnptRow(
             <div class="existing-evidence">
 
                 ${
-                    data.evidence_url
+                    evidencePath
                         ? `
                             <button
                                 type="button"
@@ -1117,7 +1129,7 @@ function addLnptRow(
             <small class="evidence-status">
 
                 ${
-                    data.evidence_url
+                    evidencePath
                         ? "Evidence telah disimpan."
                         : "PDF / JPG / PNG, maksimum 10MB."
                 }
@@ -1160,7 +1172,14 @@ function addLnptRow(
             "click",
             async function () {
 
+                const originalText =
+                    "📄 View Evidence";
+
+
                 try {
+
+                    viewButton.disabled =
+                        true;
 
                     viewButton.innerText =
                         "Opening...";
@@ -1176,10 +1195,24 @@ function addLnptRow(
                     );
 
 
+                    if (!path) {
+
+                        throw new Error(
+                            "Evidence path tidak dijumpai."
+                        );
+                    }
+
+
                     const url =
                         await getEvidenceUrl(
                             path
                         );
+
+
+                    console.log(
+                        "LNPT Evidence URL:",
+                        url
+                    );
 
 
                     if (!url) {
@@ -1187,7 +1220,6 @@ function addLnptRow(
                         throw new Error(
                             "Evidence tidak dapat dibuka."
                         );
-
                     }
 
 
@@ -1205,14 +1237,17 @@ function addLnptRow(
 
 
                     alert(
+                        error.message ||
                         "Evidence tidak dapat dibuka."
                     );
 
                 } finally {
 
-                    viewButton.innerText =
-                        "📄 View Evidence";
+                    viewButton.disabled =
+                        false;
 
+                    viewButton.innerText =
+                        originalText;
                 }
 
             }
@@ -1239,21 +1274,25 @@ function addLnptRow(
                 this.files[0];
 
 
-            if (!file) {
-
-                return;
-
-            }
-
-
             const status =
                 row.querySelector(
                     ".evidence-status"
                 );
 
 
+            if (!file) {
+
+                status.innerText =
+                    evidencePath
+                        ? "Evidence telah disimpan."
+                        : "PDF / JPG / PNG, maksimum 10MB.";
+
+                return;
+            }
+
+
             status.innerText =
-                `Fail dipilih: ${file.name}`;
+                `Fail dipilih: ${file.name}. Tekan Save Changes untuk simpan.`;
 
         }
     );
@@ -1302,7 +1341,6 @@ function addLnptRow(
 
                 existingEvidence.innerHTML =
                     "";
-
             }
 
 
@@ -1316,12 +1354,10 @@ function addLnptRow(
 
                 status.innerText =
                     "PDF / JPG / PNG, maksimum 10MB.";
-
             }
 
         }
     );
-
 }
 
 
@@ -1354,7 +1390,6 @@ async function loadLnptHistory(userId) {
         );
 
         return;
-
     }
 
 
@@ -1382,7 +1417,6 @@ async function loadLnptHistory(userId) {
         );
 
     }
-
 }
 
 
@@ -1406,7 +1440,6 @@ if (addPositionBtn) {
 
         }
     );
-
 }
 
 
@@ -1430,7 +1463,6 @@ if (addApcBtn) {
 
         }
     );
-
 }
 
 
@@ -1460,9 +1492,7 @@ employmentForm.addEventListener(
             // ======================================
 
             const {
-                data: {
-                    user
-                },
+                data: { user },
                 error: userError
             } =
                 await supabaseClient.auth.getUser();
@@ -1476,7 +1506,6 @@ employmentForm.addEventListener(
                 throw new Error(
                     "User tidak dijumpai. Sila login semula."
                 );
-
             }
 
 
@@ -1555,7 +1584,6 @@ employmentForm.addEventListener(
             if (employmentError) {
 
                 throw employmentError;
-
             }
 
 
@@ -1596,39 +1624,71 @@ employmentForm.addEventListener(
                     ).value;
 
 
-                const duration =
-                    row.querySelector(
-                        ".position-duration"
-                    ).value.trim();
+                // ==================================
+                // CALCULATE AGAIN BEFORE SAVE
+                // ==================================
 
+                const duration =
+                    calculatePositionDuration(
+                        fromDate,
+                        toDate
+                    );
+
+
+                // Update UI
+                row.querySelector(
+                    ".position-duration"
+                ).value =
+                    duration;
+
+
+                // ==================================
+                // INVALID DATE
+                // ==================================
 
                 if (
-                    position ||
-                    fromDate ||
-                    toDate ||
-                    duration
+                    duration ===
+                    "Tarikh tidak sah"
                 ) {
 
-                    positions.push({
-
-                        user_id:
-                            userId,
-
-                        position:
-                            position,
-
-                        from_date:
-                            fromDate || null,
-
-                        to_date:
-                            toDate || null,
-
-                        duration:
-                            duration
-
-                    });
-
+                    throw new Error(
+                        `Tarikh jawatan "${position || "tanpa nama"}" tidak sah.`
+                    );
                 }
+
+
+                // ==================================
+                // SKIP EMPTY ROW
+                // ==================================
+
+                if (
+                    !position &&
+                    !fromDate &&
+                    !toDate
+                ) {
+
+                    continue;
+                }
+
+
+                positions.push({
+
+                    user_id:
+                        userId,
+
+                    position:
+                        position,
+
+                    from_date:
+                        fromDate || null,
+
+                    to_date:
+                        toDate || null,
+
+                    duration:
+                        duration
+
+                });
 
             }
 
@@ -1652,7 +1712,6 @@ employmentForm.addEventListener(
             if (deletePositionError) {
 
                 throw deletePositionError;
-
             }
 
 
@@ -1682,9 +1741,7 @@ employmentForm.addEventListener(
                 ) {
 
                     throw insertPositionError;
-
                 }
-
             }
 
 
@@ -1702,6 +1759,142 @@ employmentForm.addEventListener(
 
 
             const apcRecords = [];
+
+
+            // ======================================
+            // PROCESS APC FIRST
+            // ======================================
+
+            for (
+                const row
+                of apcRows
+            ) {
+
+                const yearInput =
+                    row.querySelector(
+                        ".apc-year"
+                    );
+
+
+                const fileInput =
+                    row.querySelector(
+                        ".apc-file"
+                    );
+
+
+                const year =
+                    yearInput.value;
+
+
+                const file =
+                    fileInput.files[0];
+
+
+                const existingEvidence =
+                    row.dataset.evidencePath ||
+                    "";
+
+
+                // ==================================
+                // SKIP EMPTY ROW
+                // ==================================
+
+                if (
+                    !year &&
+                    !file &&
+                    !existingEvidence
+                ) {
+
+                    continue;
+                }
+
+
+                // ==================================
+                // YEAR REQUIRED
+                // ==================================
+
+                if (!year) {
+
+                    throw new Error(
+                        "Sila masukkan tahun APC."
+                    );
+                }
+
+
+                let evidencePath =
+                    existingEvidence;
+
+
+                // ==================================
+                // UPLOAD NEW EVIDENCE
+                // ==================================
+
+                if (file) {
+
+                    evidencePath =
+                        await uploadEvidence(
+                            file,
+                            userId,
+                            "apc"
+                        );
+                }
+
+
+                // ==================================
+                // EVIDENCE REQUIRED
+                // ==================================
+
+                if (!evidencePath) {
+
+                    throw new Error(
+                        `Sila masukkan evidence APC bagi tahun ${year}.`
+                    );
+                }
+
+
+                apcRecords.push({
+
+                    user_id:
+                        userId,
+
+                    apc_year:
+                        parseInt(
+                            year,
+                            10
+                        ),
+
+                    evidence_url:
+                        evidencePath
+
+                });
+
+            }
+
+
+            // ======================================
+            // CHECK DUPLICATE APC YEARS
+            // ======================================
+
+            const apcYears =
+                apcRecords.map(
+                    record =>
+                        record.apc_year
+                );
+
+
+            const uniqueApcYears =
+                new Set(apcYears);
+
+
+            if (
+                uniqueApcYears.size !==
+                apcYears.length
+            ) {
+
+                throw new Error(
+                    "Tahun APC tidak boleh sama."
+                );
+            }
 
 
             // ======================================
@@ -1723,115 +1916,11 @@ employmentForm.addEventListener(
             if (deleteApcError) {
 
                 throw deleteApcError;
-
             }
 
 
             // ======================================
-            // PROCESS APC
-            // ======================================
-
-            for (
-                const row
-                of apcRows
-            ) {
-
-                const year =
-                    row.querySelector(
-                        ".apc-year"
-                    ).value;
-
-
-                const file =
-                    row.querySelector(
-                        ".apc-file"
-                    ).files[0];
-
-
-                const existingEvidence =
-                    row.dataset.evidencePath ||
-                    "";
-
-
-                // ==================================
-                // SKIP EMPTY ROW
-                // ==================================
-
-                if (
-                    !year &&
-                    !file &&
-                    !existingEvidence
-                ) {
-
-                    continue;
-
-                }
-
-
-                // ==================================
-                // YEAR REQUIRED
-                // ==================================
-
-                if (!year) {
-
-                    throw new Error(
-                        "Sila masukkan tahun APC."
-                    );
-
-                }
-
-
-                let evidencePath =
-                    existingEvidence;
-
-
-                // ==================================
-                // UPLOAD NEW EVIDENCE
-                // ==================================
-
-                if (file) {
-
-                    evidencePath =
-                        await uploadEvidence(
-                            file,
-                            userId,
-                            "apc"
-                        );
-
-                }
-
-
-                // ==================================
-                // EVIDENCE REQUIRED
-                // ==================================
-
-                if (!evidencePath) {
-
-                    throw new Error(
-                        `Sila masukkan evidence APC bagi tahun ${year}.`
-                    );
-
-                }
-
-
-                apcRecords.push({
-
-                    user_id:
-                        userId,
-
-                    apc_year:
-                        parseInt(year),
-
-                    evidence_url:
-                        evidencePath
-
-                });
-
-            }
-
-
-            // ======================================
-            // INSERT APC
+            // INSERT APC RECORDS
             // ======================================
 
             if (
@@ -1854,9 +1943,7 @@ employmentForm.addEventListener(
                 ) {
 
                     throw insertApcError;
-
                 }
-
             }
 
 
@@ -1914,7 +2001,6 @@ employmentForm.addEventListener(
                 ) {
 
                     continue;
-
                 }
 
 
@@ -1927,7 +2013,6 @@ employmentForm.addEventListener(
                     throw new Error(
                         "Sila masukkan tahun LNPT."
                     );
-
                 }
 
 
@@ -1940,7 +2025,6 @@ employmentForm.addEventListener(
                     throw new Error(
                         `Sila masukkan markah LNPT bagi tahun ${year}.`
                     );
-
                 }
 
 
@@ -1953,6 +2037,7 @@ employmentForm.addEventListener(
                 // ==================================
 
                 if (
+                    isNaN(numericMark) ||
                     numericMark < 0 ||
                     numericMark > 100
                 ) {
@@ -1960,7 +2045,6 @@ employmentForm.addEventListener(
                     throw new Error(
                         `Markah LNPT bagi tahun ${year} mestilah antara 0 hingga 100.`
                     );
-
                 }
 
 
@@ -1980,7 +2064,6 @@ employmentForm.addEventListener(
                             userId,
                             "lnpt"
                         );
-
                 }
 
 
@@ -1993,7 +2076,6 @@ employmentForm.addEventListener(
                     throw new Error(
                         `Sila masukkan evidence LNPT bagi tahun ${year}.`
                     );
-
                 }
 
 
@@ -2003,7 +2085,10 @@ employmentForm.addEventListener(
                         userId,
 
                     lnpt_year:
-                        parseInt(year),
+                        parseInt(
+                            year,
+                            10
+                        ),
 
                     markah:
                         numericMark,
@@ -2042,7 +2127,6 @@ employmentForm.addEventListener(
                 throw new Error(
                     "Tahun LNPT tidak boleh sama."
                 );
-
             }
 
 
@@ -2065,7 +2149,6 @@ employmentForm.addEventListener(
             if (deleteLnptError) {
 
                 throw deleteLnptError;
-
             }
 
 
@@ -2093,9 +2176,7 @@ employmentForm.addEventListener(
                 ) {
 
                     throw insertLnptError;
-
                 }
-
             }
 
 
@@ -2115,6 +2196,15 @@ employmentForm.addEventListener(
                 "Employment data saved successfully."
             );
 
+
+            // Reload data
+            await loadPositionHistory(userId);
+
+            await loadApcHistory(userId);
+
+            await loadLnptHistory(userId);
+
+
         } catch (error) {
 
             console.error(
@@ -2130,7 +2220,6 @@ employmentForm.addEventListener(
 
             message.style.color =
                 "red";
-
         }
 
     }
@@ -2149,13 +2238,11 @@ if (logoutBtn) {
 
             await supabaseClient.auth.signOut();
 
-
             window.location.href =
                 "index.html";
 
         }
     );
-
 }
 
 
