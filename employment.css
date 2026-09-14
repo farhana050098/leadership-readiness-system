@@ -121,29 +121,20 @@ body {
 
 .form-group input,
 .form-group select {
-
     width: 100%;
     height: 45px;
-
     border: 1px solid #d1d5db;
-
     border-radius: 7px;
-
     padding: 0 12px;
-
     font-size: 14px;
-
     outline: none;
-
     background: white;
 }
 
 
 .form-group input:focus,
 .form-group select:focus {
-
     border-color: #2563eb;
-
 }
 
 
@@ -152,17 +143,11 @@ body {
 ========================================== */
 
 .section-header {
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: flex-start;
-
     gap: 15px;
-
     margin-bottom: 20px;
-
 }
 
 
@@ -176,21 +161,13 @@ body {
 ========================================== */
 
 .add-btn {
-
     background: #2563eb;
-
     color: white;
-
     border: none;
-
     padding: 10px 15px;
-
     border-radius: 7px;
-
     cursor: pointer;
-
     white-space: nowrap;
-
 }
 
 
@@ -209,55 +186,35 @@ body {
 
 
 table {
-
     width: 100%;
-
     border-collapse: collapse;
-
     min-width: 650px;
-
 }
 
 
 th,
 td {
-
     border: 1px solid #e5e7eb;
-
     padding: 10px;
-
     text-align: left;
-
     font-size: 13px;
-
 }
 
 
 th {
-
     background: #eef4fb;
-
     color: #163b65;
-
     font-weight: 600;
-
 }
 
 
 td input {
-
     width: 100%;
-
     height: 38px;
-
     border: 1px solid #d1d5db;
-
     border-radius: 5px;
-
     padding: 5px 8px;
-
     outline: none;
-
 }
 
 
@@ -271,19 +228,12 @@ td input:focus {
 ========================================== */
 
 .delete-btn {
-
     background: #dc3545;
-
     color: white;
-
     border: none;
-
     padding: 8px 10px;
-
     border-radius: 5px;
-
     cursor: pointer;
-
 }
 
 
@@ -297,80 +247,50 @@ td input:focus {
 ========================================== */
 
 #apcList {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 12px;
-
 }
 
 
 .apc-row {
-
     display: grid;
-
     grid-template-columns: 150px 1fr auto;
-
     gap: 10px;
-
     align-items: center;
-
     padding: 12px;
-
     background: #f8fafc;
-
     border: 1px solid #e5e7eb;
-
     border-radius: 8px;
-
 }
 
 
 .apc-row input[type="number"] {
-
     height: 42px;
-
     border: 1px solid #d1d5db;
-
     border-radius: 7px;
-
     padding: 0 12px;
-
     outline: none;
-
 }
 
 
 .apc-row input[type="file"] {
-
     width: 100%;
-
     font-size: 13px;
-
 }
 
 
 .evidence-status {
-
     font-size: 12px;
-
     color: #6b7280;
-
 }
 
 
 .evidence-link {
-
     color: #2563eb;
-
     text-decoration: none;
-
     font-size: 12px;
-
     font-weight: 600;
-
 }
 
 
@@ -380,170 +300,8 @@ td input:focus {
 
 
 /* ==========================================
-   LNPT
-========================================== */
-
-.lnpt-table {
-    min-width: 750px;
-}
-
-
-.lnpt-table input[type="number"] {
-
-    width: 100%;
-
-    height: 38px;
-
-    border: 1px solid #d1d5db;
-
-    border-radius: 5px;
-
-    padding: 5px 8px;
-
-    outline: none;
-
-}
-
-
-.lnpt-table input[type="file"] {
-
-    width: 100%;
-
-    font-size: 12px;
-
-}
-
-
-.lnpt-number {
-    text-align: center;
-    font-weight: 600;
-}
-
-
-.lnpt-evidence {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 5px;
-
-}
-
-
-/* ==========================================
-   SAVE BUTTON
-========================================== */
-
-.save-btn {
-
-    width: 100%;
-
-    height: 50px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #222;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-}
-
-
-.save-btn:hover {
-    opacity: .9;
-}
-
-
-#message {
-
-    text-align: center;
-
-    margin-top: 15px;
-
-    font-size: 14px;
-
-}
-
-
-/* ==========================================
-   NAVIGATION
-========================================== */
-
-.navigation-buttons {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin: 25px 0 30px;
-
-}
-
-
-.back-btn,
-.next-btn {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 12px 20px;
-
-    border-radius: 8px;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: 500;
-
-}
-
-
-.back-btn {
-
-    background: #777;
-
-    color: white;
-
-}
-
-
-.back-btn:hover {
-    background: #555;
-}
-
-
-.next-btn {
-
-    background: #163b65;
-
-    color: white;
-
-}
-
-
-.next-btn:hover {
-    background: #0f2d4d;
-}
-/* ==========================================
    VIEW EVIDENCE BUTTON
-   ========================================== */
+========================================== */
 
 .view-evidence-btn {
     background: none;
@@ -561,19 +319,138 @@ td input:focus {
 }
 
 
-
-
 .view-evidence-btn:hover {
-    opacity: 0.5;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
+
+/* ==========================================
+   EXISTING EVIDENCE
+========================================== */
 
 .existing-evidence {
-
     margin-top: 4px;
-
 }
+
+
+/* ==========================================
+   LNPT
+========================================== */
+
+.lnpt-table {
+    min-width: 750px;
+}
+
+
+.lnpt-table input[type="number"] {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    padding: 5px 8px;
+    outline: none;
+}
+
+
+.lnpt-table input[type="file"] {
+    width: 100%;
+    font-size: 12px;
+}
+
+
+.lnpt-number {
+    text-align: center;
+    font-weight: 600;
+}
+
+
+.lnpt-evidence {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+/* ==========================================
+   SAVE BUTTON
+========================================== */
+
+.save-btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.save-btn:hover {
+    opacity: 0.9;
+}
+
+
+#message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0 30px;
+}
+
+
+.back-btn,
+.next-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.back-btn {
+    background: #777;
+    color: white;
+}
+
+
+.back-btn:hover {
+    background: #555;
+}
+
+
+.next-btn {
+    background: #163b65;
+    color: white;
+}
+
+
+.next-btn:hover {
+    background: #0f2d4d;
+}
+
 
 /* ==========================================
    MOBILE
@@ -587,11 +464,8 @@ td input:focus {
 
 
     .header {
-
         align-items: center;
-
         flex-direction: row;
-
     }
 
 
@@ -611,23 +485,36 @@ td input:focus {
 
 
     .section-header {
-
         align-items: flex-start;
-
         flex-direction: column;
-
     }
 
 
     .apc-row {
-
         grid-template-columns: 1fr;
-
     }
 
 
     .apc-row input {
         width: 100%;
+    }
+
+
+    .navigation-buttons {
+        gap: 10px;
+        margin: 20px 0 25px;
+    }
+
+
+    .back-btn,
+    .next-btn {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+
+    .view-evidence-btn {
+        font-size: 12px;
     }
 
 }
