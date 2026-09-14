@@ -398,6 +398,7 @@ function addPositionRow(data = {}) {
                 class="position-name"
                 placeholder="Jawatan"
                 value="${escapeHtml(data.position || "")}"
+                placeholder="Contoh: Ketua Jabatan"
             >
 
         </td>
@@ -430,8 +431,9 @@ function addPositionRow(data = {}) {
             <input
                 type="text"
                 class="position-duration"
-                placeholder="Contoh: 2 tahun"
-                value="${escapeHtml(data.duration || "")}"
+                value=""
+                placeholder="CTempoh akan dikira"
+                readonly
             >
 
         </td>
@@ -453,6 +455,80 @@ function addPositionRow(data = {}) {
 
     positionTableBody.appendChild(row);
 
+        const fromInput = row.querySelector(".position-from");
+    const toInput = row.querySelector(".position-to");
+    const durationInput = row.querySelector(".position-duration");
+
+    function calculateDuration() {
+        const fromValue = fromInput.value;
+        const toValue = toInput.value;
+
+        if (!fromValue || !toValue) {
+            durationInput.value = "";
+            return;
+        }
+
+        const fromDate = new Date(fromValue);
+        const toDate = new Date(toValue);
+
+        if (toDate < fromDate) {
+            durationInput.value = "Tarikh tidak sah";
+            return;
+        }
+
+        let years = toDate.getFullYear() - fromDate.getFullYear();
+        let months = toDate.getMonth() - fromDate.getMonth();
+        let days = toDate.getDate() - fromDate.getDate();
+
+        if (days < 0) {
+            months--;
+
+            const previousMonth = new Date(
+                toDate.getFullYear(),
+                toDate.getMonth(),
+                0
+            );
+
+            days += previousMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        let result = [];
+
+        if (years > 0) {
+            result.push(`${years} tahun`);
+        }
+
+        if (months > 0) {
+            result.push(`${months} bulan`);
+        }
+
+        if (days > 0) {
+            result.push(`${days} hari`);
+        }
+
+        if (result.length === 0) {
+            result.push("0 hari");
+        }
+
+        durationInput.value = result.join(" ");
+    }
+
+    fromInput.addEventListener("change", calculateDuration);
+    toInput.addEventListener("change", calculateDuration);
+
+    // Kira semula untuk data lama
+    calculateDuration();
+
+    // Delete
+    row.querySelector(".delete-position-btn").addEventListener("click", () => {
+        row.remove();
+    });
+}
 
     // ==========================================
     // DELETE
@@ -533,27 +609,120 @@ async function loadPositionHistory(userId) {
 
 function addApcRow(data = {}) {
 
-    const row =
-        document.createElement("div");
-
-
-    row.className =
-        "apc-row";
-
-
-    // ==========================================
-    // EXISTING EVIDENCE PATH
-    // ==========================================
+    const row = document.createElement("div");
+    row.className = "apc-row";
 
     const evidencePath =
         data.evidence_url ||
         data.evidence_path ||
         "";
 
+    row.dataset.evidencePath = evidencePath;
 
-    row.dataset.evidencePath =
-        evidencePath;
+    row.innerHTML = `
+        <div class="apc-field">
+            <label>Tahun APC</label>
 
+            <input
+                type="number"
+                class="apc-year"
+                value="${data.apc_year || ""}"
+                min="1900"
+                max="2100"
+                placeholder="Contoh: 2025"
+            >
+        </div>
+
+        <div class="apc-field">
+            <label>Evidence</label>
+
+            <input
+                type="file"
+                class="apc-file"
+                accept=".pdf,.jpg,.jpeg,.png"
+            >
+
+            <div class="existing-evidence">
+                ${
+                    evidencePath
+                        ? `
+                            <button
+                                type="button"
+                                class="view-evidence-btn"
+                            >
+                                📄 View Evidence
+                            </button>
+                        `
+                        : ""
+                }
+            </div>
+
+            <small class="evidence-status">
+                ${
+                    evidencePath
+                        ? "Evidence telah disimpan."
+                        : "PDF / JPG / PNG, maksimum 10MB."
+                }
+            </small>
+        </div>
+
+        <div class="apc-action">
+            <button
+                type="button"
+                class="delete-btn delete-apc-btn"
+            >
+                Delete
+            </button>
+        </div>
+    `;
+
+    apcList.appendChild(row);
+
+    // ==========================================
+    // EXISTING EVIDENCE PATH
+    // ==========================================
+
+
+    const viewBtn = row.querySelector(".view-evidence-btn");
+
+    if (viewBtn) {
+
+        viewBtn.addEventListener("click", async () => {
+
+            if (!row.dataset.evidencePath) {
+                alert("Evidence tidak dijumpai.");
+                return;
+            }
+
+            try {
+
+                viewBtn.disabled = true;
+                viewBtn.textContent = "Opening...";
+
+                const url = await getEvidenceUrl(
+                    row.dataset.evidencePath
+                );
+
+                if (!url) {
+                    alert("Tidak dapat membuka evidence.");
+                    return;
+                }
+
+                window.open(url, "_blank");
+
+            } catch (error) {
+
+                console.error("View APC Evidence Error:", error);
+
+                alert("Ralat semasa membuka evidence.");
+
+            } finally {
+
+                viewBtn.disabled = false;
+                viewBtn.textContent = "📄 View Evidence";
+            }
+        });
+    }
 
     // ==========================================
     // APC HTML
@@ -744,38 +913,26 @@ function addApcRow(data = {}) {
     // FILE CHANGE
     // ==========================================
 
-    const fileInput =
-        row.querySelector(
-            ".apc-file"
-        );
+    const fileInput = row.querySelector(".apc-file");
+    const status = row.querySelector(".evidence-status");
 
+    fileInput.addEventListener("change", () => {
 
-    fileInput.addEventListener(
-        "change",
-        function () {
+        if (fileInput.files.length > 0) {
 
-            const file =
-                this.files[0];
+            const file = fileInput.files[0];
 
+            status.textContent =
+                `File dipilih: ${file.name}. Sila tekan Save Changes untuk simpan.`;
 
-            if (!file) {
+        } else {
 
-                return;
-
-            }
-
-
-            const status =
-                row.querySelector(
-                    ".evidence-status"
-                );
-
-
-            status.innerText =
-                `Fail dipilih: ${file.name}`;
-
+            status.textContent =
+                evidencePath
+                    ? "Evidence telah disimpan."
+                    : "PDF / JPG / PNG, maksimum 10MB.";
         }
-    );
+    });
 
 
     // ==========================================
