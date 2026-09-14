@@ -453,7 +453,7 @@ function addPositionRow(data = {}) {
 
     positionTableBody.appendChild(row);
 
-     const fromInput = row.querySelector(".position-from");
+    const fromInput = row.querySelector(".position-from");
     const toInput = row.querySelector(".position-to");
     const durationInput = row.querySelector(".position-duration");
 
@@ -474,7 +474,7 @@ function addPositionRow(data = {}) {
             return;
         }
 
-                let years = toDate.getFullYear() - fromDate.getFullYear();
+        let years = toDate.getFullYear() - fromDate.getFullYear();
         let months = toDate.getMonth() - fromDate.getMonth();
         let days = toDate.getDate() - fromDate.getDate();
 
@@ -520,7 +520,7 @@ function addPositionRow(data = {}) {
     toInput.addEventListener("change", calculateDuration);
 
         calculateDuration();
-        
+
     // ==========================================
     // DELETE
     // ==========================================
@@ -1524,7 +1524,7 @@ employmentForm.addEventListener(
                         user_id:
                             userId,
 
-                        position:
+                        position_name:
                             position,
 
                         from_date:
@@ -1533,8 +1533,6 @@ employmentForm.addEventListener(
                         to_date:
                             toDate || null,
 
-                        duration:
-                            duration
 
                     });
 
