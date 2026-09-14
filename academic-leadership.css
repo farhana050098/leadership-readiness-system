@@ -234,43 +234,43 @@ td {
 
 }
 
-  .navigation-buttons {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        margin: 25px 0 30px;
-    }
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0 30px;
+}
 
-    .back-btn,
-    .next-btn {
-        padding: 12px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-size: 14px;
-    }
+.back-btn,
+.next-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
 
-    .back-btn {
+.back-btn {
     background: #777;
     color: white;
-    }
+}
 
-    .back-btn:hover {
-    background: #555;
-    }
+.back-btn:hover {
+background: #555;
+}
 
-    .next-btn {
-        background: #163b65;
-        color: white;
-    }
+.next-btn {
+    background: #163b65;
+    color: white;
+}
 
-    .next-btn:hover {
-        background: #0f2d4d;
-    }
+.next-btn:hover {
+    background: #0f2d4d;
+}
 
-    .save-btn {
-        margin: 0 auto;
-    }
+.save-btn {
+    margin: 0 auto;
+}
 
 
 /* =========================
