@@ -443,7 +443,7 @@ function addPositionRow(data = {}) {
                 type="button"
                 class="delete-btn"
             >
-                Delete
+                Hapus
             </button>
 
         </td>
