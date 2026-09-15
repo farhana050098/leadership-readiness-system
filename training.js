@@ -280,7 +280,7 @@ function createTrainingItem(
 
 
         <div class="attendance-label">
-            Attendance
+            Kehadiran
         </div>
 
 
@@ -344,7 +344,7 @@ function createTrainingItem(
 
 
             <label>
-                Evidence / Certificate
+                Dokumen Sokongan
             </label>
 
             <input
@@ -359,13 +359,13 @@ function createTrainingItem(
                     ? `
                         <small class="existing-evidence">
 
-                            Existing evidence:
+                        
 
                             <a
                                 href="#"
                                 class="view-evidence"
                             >
-                                📄 View Evidence
+                                📄 Lihat Dokumen Sokongan
                             </a>
 
                         </small>
@@ -415,7 +415,7 @@ function createTrainingItem(
                     } else {
 
                         alert(
-                            "Unable to open evidence."
+                            "Gagal membuka Dokumen Sokongan."
                         );
 
                     }
@@ -512,7 +512,7 @@ async function uploadEvidence(
     ) {
 
         throw new Error(
-            "Evidence must be PDF, JPG or PNG."
+            "Dokumen Sokongan mesti format PDF, JPG or PNG."
         );
 
     }
@@ -530,7 +530,7 @@ async function uploadEvidence(
     if (file.size > maxSize) {
 
         throw new Error(
-            "Evidence file must not exceed 10 MB."
+            "Dokumen Sokongan maksimum  10 MB."
         );
 
     }
@@ -651,7 +651,7 @@ async function saveTraining(userId) {
 
 
     message.innerText =
-        "Saving training information...";
+        "Menyimpan...";
 
 
     message.style.color =
@@ -738,7 +738,7 @@ async function saveTraining(userId) {
                 if (!year) {
 
                     message.innerText =
-                        "Please enter the year for every training attended.";
+                        "Sila masukkan tahun bagi setiap latihan yang dihadiri.";
 
                     message.style.color =
                         "red";
@@ -789,7 +789,7 @@ async function saveTraining(userId) {
                 if (!evidencePath) {
 
                     message.innerText =
-                        "Please upload evidence/certificate for every training marked Ya.";
+                        "Muat Naik Dokumen Sokongan (Jika Ya).";
 
                     message.style.color =
                         "red";
@@ -883,7 +883,7 @@ async function saveTraining(userId) {
         // ==========================================
 
         message.innerText =
-            "Training information saved successfully!";
+            "Maklumat Latihan berjaya disimpan!";
 
         message.style.color =
             "green";
@@ -898,7 +898,7 @@ async function saveTraining(userId) {
 
 
         message.innerText =
-            "Failed to save training information: " +
+            "Gagal menyimpan Maklumat Latihan: " +
             error.message;
 
         message.style.color =

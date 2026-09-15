@@ -188,7 +188,7 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    min-width: 650px;
+    min-width: 850px;
 }
 
 
@@ -207,19 +207,53 @@ th {
     font-weight: 600;
 }
 
+/* ==========================================
+   TABLE INPUT
+========================================== */
 
 td input {
     width: 100%;
     height: 38px;
-    border: 1px solid #d1d5db;
+    border: 1px solid #b2b3b4;
     border-radius: 5px;
     padding: 5px 8px;
     outline: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   INPUT FOCUS
+========================================== */
+
+td input:focus {
+    border-color: #d0d7e6;
 }
 
 
-td input:focus {
-    border-color: #2563eb;
+/* ==========================================
+   AUTO DURATION
+========================================== */
+
+.position-duration {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #d8dee6;
+    border-radius: 6px;
+    background: #f5f7fa;
+    color: #555;
+    font-size: 12px;
+    cursor: not-allowed;
+}
+
+.position-duration::placeholder {
+    color: #999;
+}
+
+.position-duration:focus {
+    outline: none;
+    border-color: #d8dee6;
 }
 
 

@@ -41,13 +41,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "index.html";
 
         return;
+
     }
 
 
     await loadLeadershipHistory(user.id);
 
 
-    // Add new row
+    // ==========================================
+    // ADD NEW ROW
+    // ==========================================
 
     document
         .getElementById("addPositionBtn")
@@ -58,7 +61,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
 
-    // Save
+    // ==========================================
+    // SAVE
+    // ==========================================
 
     document
         .getElementById("saveBtn")
@@ -69,7 +74,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
 
-    // Logout
+    // ==========================================
+    // LOGOUT
+    // ==========================================
 
     document
         .getElementById("logoutBtn")
@@ -94,9 +101,13 @@ async function loadLeadershipHistory(userId) {
         data,
         error
     } = await supabaseClient
+
         .from("academic_leadership_history")
+
         .select("*")
+
         .eq("user_id", userId)
+
         .order("start_date", {
             ascending: true
         });
@@ -104,12 +115,16 @@ async function loadLeadershipHistory(userId) {
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            "Load Leadership History Error:",
+            error
+        );
 
         document.getElementById("message").innerText =
             "Failed to load leadership history.";
 
         return;
+
     }
 
 
@@ -127,6 +142,7 @@ async function loadLeadershipHistory(userId) {
         addLeadershipRow();
 
         return;
+
     }
 
 
@@ -135,6 +151,121 @@ async function loadLeadershipHistory(userId) {
         addLeadershipRow(record);
 
     });
+
+}
+
+
+// ==========================================
+// CALCULATE DURATION TEXT
+// ==========================================
+
+function calculateDurationText(startDate, endDate) {
+
+    if (!startDate || !endDate) {
+
+        return "";
+
+    }
+
+
+    const start = new Date(startDate);
+
+    const end = new Date(endDate);
+
+
+    if (end < start) {
+
+        return "Tarikh tidak sah";
+
+    }
+
+
+    let years =
+        end.getFullYear() -
+        start.getFullYear();
+
+
+    let months =
+        end.getMonth() -
+        start.getMonth();
+
+
+    let days =
+        end.getDate() -
+        start.getDate();
+
+
+    // ==========================================
+    // ADJUST DAYS
+    // ==========================================
+
+    if (days < 0) {
+
+        months--;
+
+        const previousMonth =
+            new Date(
+                end.getFullYear(),
+                end.getMonth(),
+                0
+            );
+
+        days += previousMonth.getDate();
+
+    }
+
+
+    // ==========================================
+    // ADJUST MONTHS
+    // ==========================================
+
+    if (months < 0) {
+
+        years--;
+
+        months += 12;
+
+    }
+
+
+    const result = [];
+
+
+    if (years > 0) {
+
+        result.push(
+            `${years} tahun`
+        );
+
+    }
+
+
+    if (months > 0) {
+
+        result.push(
+            `${months} bulan`
+        );
+
+    }
+
+
+    if (days > 0) {
+
+        result.push(
+            `${days} hari`
+        );
+
+    }
+
+
+    if (result.length === 0) {
+
+        result.push("0 hari");
+
+    }
+
+
+    return result.join(" ");
 
 }
 
@@ -156,6 +287,8 @@ function addLeadershipRow(record = null) {
 
 
     row.innerHTML = `
+
+        <!-- POSITION -->
 
         <td>
 
@@ -194,6 +327,8 @@ function addLeadershipRow(record = null) {
         </td>
 
 
+        <!-- START DATE -->
+
         <td>
 
             <input
@@ -203,6 +338,8 @@ function addLeadershipRow(record = null) {
 
         </td>
 
+
+        <!-- END DATE -->
 
         <td>
 
@@ -214,13 +351,29 @@ function addLeadershipRow(record = null) {
         </td>
 
 
+        <!-- DURATION -->
+
+        <td>
+
+            <input
+                type="text"
+                class="duration-display"
+                placeholder="Akan dikira"
+                readonly
+            >
+
+        </td>
+
+
+        <!-- DELETE -->
+
         <td>
 
             <button
                 type="button"
                 class="delete-btn">
 
-                Delete
+                Hapus
 
             </button>
 
@@ -231,6 +384,10 @@ function addLeadershipRow(record = null) {
 
     tbody.appendChild(row);
 
+
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
 
     const positionSelect =
         row.querySelector(
@@ -250,29 +407,87 @@ function addLeadershipRow(record = null) {
         );
 
 
+    const durationDisplay =
+        row.querySelector(
+            ".duration-display"
+        );
+
+
     const deleteBtn =
         row.querySelector(
             ".delete-btn"
         );
 
 
-    // Existing data
+    // ==========================================
+    // EXISTING DATA
+    // ==========================================
 
     if (record) {
 
         positionSelect.value =
-            record.position_name;
+            record.position_name || "";
+
 
         startDate.value =
             record.start_date || "";
 
+
         endDate.value =
             record.end_date || "";
+
+
+        // Calculate duration again
+        durationDisplay.value =
+            calculateDurationText(
+                record.start_date,
+                record.end_date
+            );
 
     }
 
 
-    // Delete
+    // ==========================================
+    // UPDATE DURATION
+    // ==========================================
+
+    function updateDuration() {
+
+        const start =
+            startDate.value;
+
+        const end =
+            endDate.value;
+
+
+        durationDisplay.value =
+            calculateDurationText(
+                start,
+                end
+            );
+
+    }
+
+
+    // ==========================================
+    // DATE CHANGE
+    // ==========================================
+
+    startDate.addEventListener(
+        "change",
+        updateDuration
+    );
+
+
+    endDate.addEventListener(
+        "change",
+        updateDuration
+    );
+
+
+    // ==========================================
+    // DELETE
+    // ==========================================
 
     deleteBtn.addEventListener(
         "click",
@@ -293,14 +508,19 @@ function addLeadershipRow(record = null) {
 async function saveLeadershipHistory(userId) {
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
+
 
     const rows =
         document.querySelectorAll(
             "#leadershipTableBody tr"
         );
 
+
     const records = [];
+
 
     try {
 
@@ -315,10 +535,12 @@ async function saveLeadershipHistory(userId) {
                     ".position-select"
                 ).value;
 
+
             const startDate =
                 row.querySelector(
                     ".start-date"
                 ).value;
+
 
             const endDate =
                 row.querySelector(
@@ -326,58 +548,79 @@ async function saveLeadershipHistory(userId) {
                 ).value;
 
 
-            // Position required
+            // ==================================
+            // POSITION REQUIRED
+            // ==================================
+
             if (!position) {
 
                 message.innerText =
                     "Please select a position for every row.";
 
-                message.style.color = "red";
+                message.style.color =
+                    "red";
 
                 return;
+
             }
 
 
-            // Start date required
+            // ==================================
+            // START DATE REQUIRED
+            // ==================================
+
             if (!startDate) {
 
                 message.innerText =
                     "Please enter the start date.";
 
-                message.style.color = "red";
+                message.style.color =
+                    "red";
 
                 return;
+
             }
 
 
-            // End date required
+            // ==================================
+            // END DATE REQUIRED
+            // ==================================
+
             if (!endDate) {
 
                 message.innerText =
                     "Please enter the end date.";
 
-                message.style.color = "red";
+                message.style.color =
+                    "red";
 
                 return;
+
             }
 
 
+            // ==================================
+            // DATE VALIDATION
+            // ==================================
+
             const start =
                 new Date(startDate);
+
 
             const end =
                 new Date(endDate);
 
 
-            // Invalid date
             if (end < start) {
 
                 message.innerText =
                     "End date cannot be earlier than start date.";
 
-                message.style.color = "red";
+                message.style.color =
+                    "red";
 
                 return;
+
             }
 
 
@@ -446,9 +689,11 @@ async function saveLeadershipHistory(userId) {
         // ======================================
 
         message.innerText =
-            "Saving...";
+            "Menyimpan...";
 
-        message.style.color = "#555";
+
+        message.style.color =
+            "#555";
 
 
         // ======================================
@@ -458,9 +703,17 @@ async function saveLeadershipHistory(userId) {
         const {
             error: deleteError
         } = await supabaseClient
-            .from("academic_leadership_history")
+
+            .from(
+                "academic_leadership_history"
+            )
+
             .delete()
-            .eq("user_id", userId);
+
+            .eq(
+                "user_id",
+                userId
+            );
 
 
         if (deleteError) {
@@ -470,13 +723,18 @@ async function saveLeadershipHistory(userId) {
                 deleteError
             );
 
+
             message.innerText =
                 "Failed to update data: " +
                 deleteError.message;
 
-            message.style.color = "red";
+
+            message.style.color =
+                "red";
+
 
             return;
+
         }
 
 
@@ -489,9 +747,11 @@ async function saveLeadershipHistory(userId) {
             const {
                 error: insertError
             } = await supabaseClient
+
                 .from(
                     "academic_leadership_history"
                 )
+
                 .insert(records);
 
 
@@ -502,13 +762,18 @@ async function saveLeadershipHistory(userId) {
                     insertError
                 );
 
+
                 message.innerText =
-                    "Failed to save data: " +
+                    "Gagal menyimpan data: " +
                     insertError.message;
 
-                message.style.color = "red";
+
+                message.style.color =
+                    "red";
+
 
                 return;
+
             }
 
         }
@@ -519,28 +784,34 @@ async function saveLeadershipHistory(userId) {
         // ======================================
 
         message.innerText =
-            "Academic leadership history saved successfully!";
+            "Sejarah Jawatan Pentadbir Akademik berjaya disimpan!";
 
-        message.style.color = "green";
+
+        message.style.color =
+            "green";
 
 
         console.log(
-            "Academic leadership saved successfully:",
+            "Sejarah Jawatan Pentadbir Akademik berjaya:",
             records
         );
+
 
     } catch (error) {
 
         console.error(
             "Unexpected Error:",
-            error
+            Ralat
         );
 
+
         message.innerText =
-            "An unexpected error occurred: " +
+            "Ralat: " +
             error.message;
 
-        message.style.color = "red";
+
+        message.style.color =
+            "red";
 
     }
 

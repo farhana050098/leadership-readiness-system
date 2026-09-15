@@ -694,7 +694,7 @@ function addRecord(
         <div class="form-group">
 
             <label>
-                Evidence
+                Dokumen Sokongan
             </label>
 
             <input
@@ -708,13 +708,13 @@ function addRecord(
                     ? `
                         <small class="existing-evidence">
 
-                            Existing evidence:
+                        
 
                             <a
                                 href="#"
                                 class="view-evidence"
                             >
-                                📄 View Evidence
+                                📄 Lihat Dokumen Sokongan
                             </a>
 
                         </small>
@@ -735,7 +735,7 @@ function addRecord(
             type="button"
             class="delete-record"
         >
-            Delete
+            Hapus
         </button>
 
     `;
@@ -933,7 +933,7 @@ async function loadVisibility(
         document.getElementById(
             "message"
         ).innerText =
-            "Failed to load academic visibility information: " +
+            "Gagal memuatkan maklumat Ketampakan Pensyarah (Akademik): " +
             error.message;
 
         return;
@@ -1161,7 +1161,7 @@ async function saveVisibility(
 
 
     message.innerText =
-        "Saving...";
+        "Menyimpan...";
 
 
     const records = [];
@@ -1413,7 +1413,7 @@ async function saveVisibility(
                 if (!evidencePath) {
 
                     throw new Error(
-                        `Sila upload evidence untuk ${activityNames[type]}.`
+                        `Sila masukkan Dokumen Sokongan untuk ${activityNames[type]}.`
                     );
 
                 }
@@ -1519,7 +1519,7 @@ async function saveVisibility(
         // ==========================================
 
         message.innerText =
-            "Academic Visibility saved successfully!";
+            "Maklumat Ketampakan Pensyarah berjaya disimpan!";
 
         message.style.color =
             "green";
@@ -1527,13 +1527,13 @@ async function saveVisibility(
     } catch (error) {
 
         console.error(
-            "Academic visibility save error:",
+            "Ralat:",
             error
         );
 
 
         message.innerText =
-            "Failed to save academic visibility: " +
+            "Gagal menyimpan Maklumat Ketampakan Pensyarah: " +
             error.message;
 
     }

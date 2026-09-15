@@ -116,7 +116,7 @@ async function uploadEvidence(
     if (!allowedTypes.includes(file.type)) {
 
         throw new Error(
-            "Evidence mestilah dalam format PDF, JPG atau PNG."
+            "Dokumen Sokongan mestilah dalam format PDF, JPG atau PNG."
         );
 
     }
@@ -133,7 +133,7 @@ async function uploadEvidence(
     if (file.size > maxSize) {
 
         throw new Error(
-            "Saiz evidence tidak boleh melebihi 10MB."
+            "Saiz Dokumen Sokongan tidak boleh melebihi 10MB."
         );
 
     }
@@ -192,7 +192,7 @@ async function uploadEvidence(
 
 
         throw new Error(
-            "Gagal upload evidence: " +
+            "Gagal muat naik Dokumen Sokongan: " +
             error.message
         );
 
@@ -200,7 +200,7 @@ async function uploadEvidence(
 
 
     console.log(
-        "Evidence uploaded:",
+        "Dokumen Sokongan telah dimuat naik:",
         data.path
     );
 
@@ -654,7 +654,7 @@ function addApcRow(data = {}) {
         <div class="apc-input-group">
 
             <label>
-                Evidence
+                Dokumen Sokongan
             </label>
 
 
@@ -676,7 +676,7 @@ function addApcRow(data = {}) {
                                 type="button"
                                 class="view-evidence-btn"
                             >
-                                📄 View Evidence
+                                📄 Lihat Dokumen Sokongan
                             </button>
                           `
                         : ""
@@ -691,7 +691,7 @@ function addApcRow(data = {}) {
 
                 ${
                     evidencePath
-                        ? "Evidence telah disimpan."
+                        ? "Dokumen Sokongan telah disimpan."
                         : "PDF / JPG / PNG, maksimum 10MB."
                 }
 
@@ -706,7 +706,7 @@ function addApcRow(data = {}) {
             type="button"
             class="delete-btn"
         >
-            Delete
+            Hapus
         </button>
 
     `;
@@ -750,7 +750,7 @@ function addApcRow(data = {}) {
                     if (!path) {
 
                         throw new Error(
-                            "Evidence path tidak dijumpai."
+                            "Dokumen Sokongan tidak dijumpai."
                         );
 
                     }
@@ -791,13 +791,13 @@ function addApcRow(data = {}) {
 
 
                     alert(
-                        "Evidence tidak dapat dibuka."
+                        "Dokumen Sokongan tidak dapat dibuka."
                     );
 
                 } finally {
 
                     viewButton.innerText =
-                        "📄 View Evidence";
+                        "📄 Lihat Dokumen Sokongan";
 
                 }
 
@@ -1015,7 +1015,7 @@ function addLnptRow(
                                 type="button"
                                 class="view-evidence-btn"
                             >
-                                📄 View Evidence
+                                📄 Lihat Dokumen Sokongan
                             </button>
                           `
                         : ""
@@ -1028,7 +1028,7 @@ function addLnptRow(
 
                 ${
                     data.evidence_url
-                        ? "Evidence telah disimpan."
+                        ? "Dokumen Sokongan telah disimpan."
                         : "PDF / JPG / PNG, maksimum 10MB."
                 }
 
@@ -1043,7 +1043,7 @@ function addLnptRow(
                 type="button"
                 class="delete-btn"
             >
-                Clear
+                Hapus
             </button>
 
         </td>
@@ -1095,7 +1095,7 @@ function addLnptRow(
                     if (!url) {
 
                         throw new Error(
-                            "Evidence tidak dapat dibuka."
+                            "Dokumen Sokongan tidak dapat dibuka."
                         );
 
                     }
@@ -1115,13 +1115,13 @@ function addLnptRow(
 
 
                     alert(
-                        "Evidence tidak dapat dibuka."
+                        "Dokumen Sokongan tidak dapat dibuka."
                     );
 
                 } finally {
 
                     viewButton.innerText =
-                        "📄 View Evidence";
+                        "📄 Lihat Dokumen Sokongan";
 
                 }
 
@@ -1356,7 +1356,7 @@ employmentForm.addEventListener(
 
 
         message.innerText =
-            "Saving...";
+            "Menyimpan...";
 
 
         message.style.color =
@@ -1716,7 +1716,7 @@ employmentForm.addEventListener(
                 if (!evidencePath) {
 
                     throw new Error(
-                        `Sila masukkan evidence APC bagi tahun ${year}.`
+                        `Sila masukkan Dokumen Sokongan APC bagi tahun ${year}.`
                     );
 
                 }
@@ -1899,7 +1899,7 @@ employmentForm.addEventListener(
                 if (!evidencePath) {
 
                     throw new Error(
-                        `Sila masukkan evidence LNPT bagi tahun ${year}.`
+                        `Sila masukkan Dokumen Sokongan LNPT bagi tahun ${year}.`
                     );
 
                 }
@@ -2012,7 +2012,7 @@ employmentForm.addEventListener(
             // ======================================
 
             message.innerText =
-                "Data employment berjaya disimpan.";
+                "Maklumat Pekerjaan berjaya disimpan!";
 
 
             message.style.color =

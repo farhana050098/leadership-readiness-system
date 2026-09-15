@@ -107,7 +107,7 @@ profileForm.addEventListener(
 
 
         message.innerText =
-            "Saving information...";
+            "Menyimpan...";
 
         message.style.color =
             "black";
@@ -285,7 +285,7 @@ profileForm.addEventListener(
             );
 
             message.innerText =
-                "Personal information saved successfully!";
+                "Maklumat Peribadi berjaya disimpan!";
 
             message.style.color =
                 "green";
@@ -299,7 +299,7 @@ profileForm.addEventListener(
             );
 
             message.innerText =
-                "Failed to save information: " +
+                "Gagal kemaskini data: " +
                 error.message;
 
             message.style.color =
