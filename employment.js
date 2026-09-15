@@ -397,7 +397,7 @@ function addPositionRow(data = {}) {
                 type="text"
                 class="position-name"
                 placeholder="Jawatan"
-                value="${escapeHtml(data.position || "")}"
+                value="${escapeHtml(data.position_name || "")}"
             >
 
         </td>
